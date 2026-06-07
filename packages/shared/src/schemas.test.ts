@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appRoleSchema, campaignFormSchema, csvLeadRowSchema, mockupSourceFormSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
+import { appRoleSchema, campaignFormSchema, csvLeadRowSchema, mockupSourceFormSchema, portfolioAssetFormSchema, productPackageFormSchema, runtimeTemplateFormSchema, workerJobSchema } from "./schemas.js";
 
 describe("shared schemas", () => {
   it("accepts supported application roles", () => {
@@ -57,5 +57,26 @@ describe("shared schemas", () => {
 
     expect(input.status).toBe("certified");
     expect(input.notes).toBe("");
+  });
+
+  it("validates runtime mockup template geometry", () => {
+    const input = runtimeTemplateFormSchema.parse({
+      name: "Mug front runtime pack",
+      productType: "mug",
+      technology: "UV print",
+      status: "certified",
+      safeAreaX: 35,
+      safeAreaY: 25,
+      safeAreaWidth: 30,
+      safeAreaHeight: 30,
+      placementX: 35,
+      placementY: 25,
+      placementWidth: 30,
+      placementHeight: 30,
+    });
+
+    expect(input.status).toBe("certified");
+    expect(input.isActive).toBe(true);
+    expect(input.placementRotation).toBe(0);
   });
 });

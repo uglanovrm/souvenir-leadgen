@@ -95,3 +95,11 @@
 - Result: Lint/typecheck/tests/build passed; shared tests now cover mockup source lifecycle metadata; unauthenticated route redirected to login; demo-auth route rendered PSD upload form, status controls, demo PSD source, and runtime template source link controls.
 - Problems: Real PSD upload, metadata update, and runtime template link mutation were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-013 and continue with ISSUE-014 Runtime mockup pack manager.
+
+## 2026-06-07 16:03
+- Current issue: ISSUE-014 Runtime mockup pack manager
+- What changed: Added runtime template schema, migration for runtime template status/product type/technology/tags/quality score, Supabase-backed runtime mockup manager service, `/app/mockup-templates` page, base/mask/shadow/highlight/preview upload action, geometry configuration, active/status fields, nav entry, and preview overlay for safe area and placement.
+- Commands run: `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3108`, `curl -I http://127.0.0.1:3108/app/mockup-templates`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3108/app/mockup-templates`.
+- Result: Initial typecheck/build failed on optional layer file typing, then passed after normalizing optional files to null; lint/typecheck/tests/build passed; unauthenticated route redirected to login; demo-auth route rendered runtime pack form, layer uploads, geometry controls, preview unavailable placeholder, safe-area overlay, placement overlay, active/status/product type/technology/quality pills.
+- Problems: Real layer upload and template insert were not executed because local Supabase env is not configured; no PSD rendering or Sharp renderer was introduced.
+- Next: Commit ISSUE-014 and continue with ISSUE-015 Logo upload and scoring.

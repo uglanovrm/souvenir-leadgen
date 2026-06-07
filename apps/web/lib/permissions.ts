@@ -11,6 +11,7 @@ export const navItems: NavItem[] = [
   { href: "/app/products", label: "Products", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/assets", label: "Assets", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/mockup-sources", label: "Mockup Sources", roles: ["admin", "producer"] },
+  { href: "/app/mockup-templates", label: "Mockup Packs", roles: ["admin", "producer"] },
   { href: "/app/campaigns", label: "Campaigns", roles: ["admin", "agent", "manager"] },
   { href: "/app/offers", label: "Offers", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/prototype-studio", label: "Prototype Studio", roles: ["admin", "producer", "manager"] },

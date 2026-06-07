@@ -19,6 +19,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-011 Offer generator v1, implemented with DB context assembly, LM Studio JSON draft validation, missing Avito warning propagation, context-only package/asset ID guard, draft offer insert, and selected portfolio asset linking.
 - ISSUE-012 Offer Studio UI, implemented with offer list, review/edit screen, package selector, portfolio asset selector, warnings panel, save draft action, and approval requiring explicit warning acceptance.
 - ISSUE-013 PSD source library, implemented with source lifecycle schema/migration, PSD upload service/page, metadata/status editing, and runtime template source linking.
+- ISSUE-014 Runtime mockup pack manager, implemented with runtime pack schema/migration, layer upload service/page, geometry configuration, active/status fields, and safe-area/placement preview overlay.
 
 ## Partial issues
 
@@ -43,6 +44,9 @@ None yet.
 - `corepack pnpm exec next dev -p 3107`
 - `curl -I http://127.0.0.1:3107/app/mockup-sources`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3107/app/mockup-sources`
+- `corepack pnpm exec next dev -p 3108`
+- `curl -I http://127.0.0.1:3108/app/mockup-templates`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3108/app/mockup-templates`
 - `corepack pnpm exec next dev -p 3105`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
@@ -93,6 +97,7 @@ None yet.
 - Offer generator full gate: lint, typecheck, tests, worker smoke, and build passed.
 - Offer Studio smoke: unauthenticated `/app/offers` redirected to login; demo-auth `/app/offers` rendered generated offer queue; demo-auth `/app/offers/demo-offer` rendered editor, selectors, warnings, save, and approve controls.
 - PSD source library smoke: unauthenticated `/app/mockup-sources` redirected to login; demo-auth route rendered PSD upload, lifecycle status controls, demo source, and runtime template source link controls.
+- Runtime mockup pack smoke: unauthenticated `/app/mockup-templates` redirected to login; demo-auth route rendered layer upload controls, geometry controls, safe-area overlay, placement overlay, active/status fields, product type, technology, and quality score.
 
 ## Known problems
 
@@ -109,6 +114,7 @@ None yet.
 - Real LM Studio offer generation was not run because local LM Studio is not configured/running in this environment.
 - Real offer save/approve mutations were not run because local Supabase is not configured in this environment.
 - Real PSD upload, PSD metadata update, and runtime template source-link mutation were not run because local Supabase is not configured in this environment.
+- Real runtime layer upload and template insert were not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
@@ -116,4 +122,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-014 Runtime mockup pack manager.
+ISSUE-015 Logo upload and scoring.

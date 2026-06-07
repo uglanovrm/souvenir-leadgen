@@ -108,6 +108,29 @@ export const mockupSourceFormSchema = z.object({
   status: mockupSourceStatusSchema.default("draft"),
 });
 
+export const runtimeTemplateStatusSchema = z.enum(["draft", "certified", "rejected"]);
+
+export const runtimeTemplateFormSchema = z.object({
+  name: z.string().trim().min(2).max(160),
+  sourceId: z.string().uuid().optional().or(z.literal("")),
+  productPackageId: z.string().uuid().optional().or(z.literal("")),
+  productType: z.string().trim().min(2).max(120),
+  technology: z.string().trim().min(2).max(120),
+  tags: z.string().trim().default(""),
+  qualityScore: z.number().min(0).max(100).default(0),
+  status: runtimeTemplateStatusSchema.default("draft"),
+  isActive: z.boolean().default(true),
+  safeAreaX: z.number().int().min(0),
+  safeAreaY: z.number().int().min(0),
+  safeAreaWidth: z.number().int().min(1),
+  safeAreaHeight: z.number().int().min(1),
+  placementX: z.number().int().min(0),
+  placementY: z.number().int().min(0),
+  placementWidth: z.number().int().min(1),
+  placementHeight: z.number().int().min(1),
+  placementRotation: z.number().min(-180).max(180).default(0),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
@@ -121,3 +144,5 @@ export type OfferDraft = z.infer<typeof offerDraftSchema>;
 export type OfferEditFormInput = z.infer<typeof offerEditFormSchema>;
 export type MockupSourceStatus = z.infer<typeof mockupSourceStatusSchema>;
 export type MockupSourceFormInput = z.infer<typeof mockupSourceFormSchema>;
+export type RuntimeTemplateStatus = z.infer<typeof runtimeTemplateStatusSchema>;
+export type RuntimeTemplateFormInput = z.infer<typeof runtimeTemplateFormSchema>;
