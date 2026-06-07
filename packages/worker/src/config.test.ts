@@ -7,6 +7,7 @@ describe("worker config", () => {
 
     expect(config.WORKER_POLL_INTERVAL_MS).toBe(5000);
     expect(config.WORKER_MAX_ATTEMPTS).toBe(3);
+    expect(config.WORKER_ID).toBe("local-worker-1");
     expect(config.SUPABASE_SERVICE_ROLE_KEY).toBeUndefined();
   });
 

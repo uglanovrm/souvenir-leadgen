@@ -47,3 +47,11 @@
 - Result: Lint/typecheck/tests/build passed; unauthenticated campaigns route redirected to login; campaign list and detail pages rendered demo create/import/read-only states and lead list.
 - Problems: Real CSV upload/import was not executed because local Supabase and env values are not configured.
 - Next: Commit campaign/import layer and continue with ISSUE-008 Jobs table and local worker.
+
+## 2026-06-07 15:23
+- Current issue: ISSUE-008 Jobs table and local worker
+- What changed: Replaced worker stub with Supabase-backed polling loop, job claim/lease helpers, retry/fail/success transitions, structured JSON logging, safe job handlers, worker env validation, and `WORKER_RUN_ONCE`/lease configuration.
+- Commands run: `corepack pnpm worker`, `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm test`, `corepack pnpm build`.
+- Result: Worker smoke exited safely without credentials and emitted structured logs; lint/typecheck/tests/build passed.
+- Problems: Real job polling was not executed because local Supabase and service role env are not configured.
+- Next: Commit P0 worker layer and continue with ISSUE-009 LM Studio client.

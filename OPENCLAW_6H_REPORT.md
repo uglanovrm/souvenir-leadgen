@@ -2,7 +2,7 @@
 
 ## Summary
 
-Autonomous run started on 2026-06-07. The repository now has a verified monorepo foundation, a Supabase-first schema/storage baseline, a working role-aware app/catalog slice, a portfolio asset library slice, and a campaign/CSV import slice.
+Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP foundation: monorepo, Supabase schema/storage, auth/roles, catalog, portfolio assets, campaigns/CSV import, and local worker loop.
 
 ## Completed issues
 
@@ -13,6 +13,7 @@ Autonomous run started on 2026-06-07. The repository now has a verified monorepo
 - ISSUE-005 Product catalog CRUD, implemented as Supabase-backed create/edit/deactivate actions with demo/read-only fallback.
 - ISSUE-006 Portfolio asset library, implemented as Supabase Storage-backed upload/metadata actions with demo/read-only fallback.
 - ISSUE-007 Campaign builder and CSV import, implemented with campaign create UI, CSV parser, import upload flow, organization dedupe logic, and campaign lead upsert.
+- ISSUE-008 Jobs table and local worker, implemented with polling, locking, retries, success/failure transitions, and structured logs.
 
 ## Partial issues
 
@@ -47,6 +48,7 @@ None yet.
 - `curl -I http://127.0.0.1:3104/app/campaigns`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns/demo-campaign`
+- `corepack pnpm worker`
 
 ## Test results
 
@@ -66,6 +68,7 @@ None yet.
 - Edit smoke: `/app/products/demo-welcome-pack/edit` rendered edit form in demo/read-only mode.
 - Asset smoke: unauthenticated `/app/assets` redirected to login; authenticated demo request rendered upload form, demo asset, metadata form, and offer-ready flag.
 - Campaign smoke: unauthenticated `/app/campaigns` redirected to login; authenticated demo request rendered campaign list, CSV import form, and demo lead list.
+- Worker smoke: without Supabase credentials the worker emitted structured `worker.start` and `worker.stub_exit` logs and exited with code 0.
 
 ## Known problems
 
@@ -75,6 +78,7 @@ None yet.
 - Real Supabase auth/catalog mutations were not run because local Supabase is not configured in this environment.
 - Real portfolio upload/storage mutation was not run because local Supabase is not configured in this environment.
 - Real CSV upload/import mutation was not run because local Supabase is not configured in this environment.
+- Real worker polling was not run because local Supabase service role env is not configured in this environment.
 
 ## Manual steps needed
 
@@ -82,4 +86,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-008 Jobs table and local worker.
+ISSUE-009 LM Studio client.
