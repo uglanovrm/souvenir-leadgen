@@ -63,3 +63,11 @@
 - Result: Worker smoke exited safely without credentials; JSON generation tests covered success, repair retry, and failed repair; lint/typecheck/tests/build passed.
 - Problems: Real LM Studio network call was not executed because local LM Studio is not configured/running in this environment.
 - Next: Commit LM Studio client and continue with ISSUE-010 Lead scoring v1.
+
+## 2026-06-07 15:31
+- Current issue: ISSUE-010 Lead scoring v1
+- What changed: Added deterministic lead scoring engine, score breakdown/explanation, shared tests, campaign detail score/explanation column, score action, Supabase update/audit path, and demo score display.
+- Commands run: `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3105`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`.
+- Result: Lint/typecheck/tests/build passed; campaign detail rendered score 75, explanation, and score action in demo/read-only mode.
+- Problems: Real Supabase score update was not executed because local Supabase and env values are not configured.
+- Next: Commit lead scoring and continue with ISSUE-011 Offer generator v1.

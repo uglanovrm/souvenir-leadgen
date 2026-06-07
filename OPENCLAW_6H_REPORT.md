@@ -2,7 +2,7 @@
 
 ## Summary
 
-Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP foundation: monorepo, Supabase schema/storage, auth/roles, catalog, portfolio assets, campaigns/CSV import, and local worker loop. P1 has started with the local LM Studio provider.
+Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP foundation: monorepo, Supabase schema/storage, auth/roles, catalog, portfolio assets, campaigns/CSV import, and local worker loop. P1 has local LM Studio provider and deterministic lead scoring.
 
 ## Completed issues
 
@@ -15,6 +15,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-007 Campaign builder and CSV import, implemented with campaign create UI, CSV parser, import upload flow, organization dedupe logic, and campaign lead upsert.
 - ISSUE-008 Jobs table and local worker, implemented with polling, locking, retries, success/failure transitions, and structured logs.
 - ISSUE-009 LM Studio client and zod validation, implemented with OpenAI-compatible local provider, typed `generateJson`, repair retry, fixtures, and tests.
+- ISSUE-010 Lead scoring v1, implemented with deterministic scoring, breakdown, explanation, UI action, and Supabase update/audit path.
 
 ## Partial issues
 
@@ -29,6 +30,8 @@ None yet.
 - `corepack pnpm test`
 - `corepack pnpm build`
 - `corepack pnpm worker`
+- `corepack pnpm exec next dev -p 3105`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
 - `curl -I --max-time 10 http://127.0.0.1:3100`
 - `supabase --version`
@@ -71,6 +74,8 @@ None yet.
 - Campaign smoke: unauthenticated `/app/campaigns` redirected to login; authenticated demo request rendered campaign list, CSV import form, and demo lead list.
 - Worker smoke: without Supabase credentials the worker emitted structured `worker.start` and `worker.stub_exit` logs and exited with code 0.
 - LM Studio JSON tests: success, invalid JSON repair, and failed repair paths passed.
+- Lead scoring tests: strong eligible lead and blocked lead paths passed.
+- Lead scoring smoke: campaign detail rendered score 75, explanation, and score action in demo/read-only mode.
 
 ## Known problems
 
@@ -82,6 +87,7 @@ None yet.
 - Real CSV upload/import mutation was not run because local Supabase is not configured in this environment.
 - Real worker polling was not run because local Supabase service role env is not configured in this environment.
 - Real LM Studio call was not run because local LM Studio is not configured/running in this environment.
+- Real Supabase score update was not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
@@ -89,4 +95,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-010 Lead scoring v1.
+ISSUE-011 Offer generator v1.
