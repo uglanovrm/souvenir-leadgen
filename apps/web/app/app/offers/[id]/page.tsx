@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getCommercialHandoff } from "../../../../lib/commercial-handoff";
 import { getOfferEditor } from "../../../../lib/offers";
-import { approveOfferAction, saveOfferDraftAction } from "./actions";
+import {
+  approveOfferAction,
+  createDealFromOfferAction,
+  enqueueOfferPdfExportAction,
+  exportOfferHtmlAction,
+  prepareOfferMessageAction,
+  saveOfferDraftAction,
+} from "./actions";
 
 type OfferEditorPageProps = {
   params: Promise<{ id: string }>;
@@ -10,6 +18,7 @@ type OfferEditorPageProps = {
 export default async function OfferEditorPage({ params }: OfferEditorPageProps) {
   const { id } = await params;
   const view = await getOfferEditor(id);
+  const handoff = await getCommercialHandoff(id);
 
   if (!view.offer) {
     notFound();
@@ -100,6 +109,84 @@ export default async function OfferEditorPage({ params }: OfferEditorPageProps) 
                 <span>Accept warnings for approval</span>
               </label>
             ) : null}
+          </section>
+
+          <section className="card stack">
+            <h2>Commercial handoff</h2>
+            <div className="toolbar">
+              <span className={handoff.offer.status === "approved" ? "pill active" : "pill"}>{handoff.offer.status}</span>
+              <span className="pill">approved prototypes {handoff.approvedPrototypeCount}</span>
+              <span className="pill">manual send only</span>
+            </div>
+
+            <div className="toolbar">
+              <button
+                className="button secondary"
+                formAction={exportOfferHtmlAction.bind(null, offer.id)}
+                formNoValidate
+                type="submit"
+                disabled={disabled || handoff.offer.status !== "approved"}
+              >
+                Export HTML
+              </button>
+              <button
+                className="button secondary"
+                formAction={enqueueOfferPdfExportAction.bind(null, offer.id)}
+                formNoValidate
+                type="submit"
+                disabled={disabled || handoff.offer.status !== "approved"}
+              >
+                Queue PDF
+              </button>
+              <button
+                className="button secondary"
+                formAction={prepareOfferMessageAction.bind(null, offer.id)}
+                formNoValidate
+                type="submit"
+                disabled={disabled || handoff.offer.status !== "approved"}
+              >
+                Prepare message
+              </button>
+              <button
+                className="button"
+                formAction={createDealFromOfferAction.bind(null, offer.id)}
+                formNoValidate
+                type="submit"
+                disabled={disabled || !handoff.canManage || handoff.offer.status !== "approved"}
+              >
+                Create deal
+              </button>
+            </div>
+
+            <div className="handoff-list">
+              <div>
+                <strong>Exports</strong>
+                {handoff.exports.length === 0 ? <p className="table-note">No exports yet.</p> : null}
+                {handoff.exports.map((item) => (
+                  <p className="table-note" key={item.id}>
+                    {item.kind}: {item.url ? <a href={item.url}>{item.storagePath}</a> : item.storagePath}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <strong>Messages</strong>
+                {handoff.messages.length === 0 ? <p className="table-note">No prepared messages yet.</p> : null}
+                {handoff.messages.map((message) => (
+                  <p className="table-note" key={message.id}>
+                    {message.status}: {message.subject} / attachments {message.attachmentCount} / {message.manualSendRequired ? "manual gate" : "review gate"}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <strong>Deals</strong>
+                {handoff.deals.length === 0 ? <p className="table-note">No deals yet.</p> : null}
+                {handoff.deals.map((deal) => (
+                  <p className="table-note" key={deal.id}>
+                    {deal.status}: amount {deal.amount}, margin {deal.margin}, commission {deal.commissionAmount} at {deal.commissionRate}%
+                  </p>
+                ))}
+              </div>
+            </div>
           </section>
 
           <section className="toolbar">

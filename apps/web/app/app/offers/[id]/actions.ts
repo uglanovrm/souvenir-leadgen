@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { createDealFromOffer, enqueueOfferPdfExport, exportOfferHtml, prepareOfferMessage } from "../../../../lib/commercial-handoff";
 import { approveOffer, saveOfferDraft } from "../../../../lib/offers";
 
 function stringList(formData: FormData, name: string) {
@@ -33,5 +34,25 @@ export async function saveOfferDraftAction(id: string, formData: FormData) {
 export async function approveOfferAction(id: string, formData: FormData) {
   await approveOffer(id, offerInputFromForm(formData));
   revalidatePath("/app/offers");
+  revalidatePath(`/app/offers/${id}`);
+}
+
+export async function exportOfferHtmlAction(id: string) {
+  await exportOfferHtml(id);
+  revalidatePath(`/app/offers/${id}`);
+}
+
+export async function enqueueOfferPdfExportAction(id: string) {
+  await enqueueOfferPdfExport(id);
+  revalidatePath(`/app/offers/${id}`);
+}
+
+export async function prepareOfferMessageAction(id: string) {
+  await prepareOfferMessage(id);
+  revalidatePath(`/app/offers/${id}`);
+}
+
+export async function createDealFromOfferAction(id: string) {
+  await createDealFromOffer(id);
   revalidatePath(`/app/offers/${id}`);
 }

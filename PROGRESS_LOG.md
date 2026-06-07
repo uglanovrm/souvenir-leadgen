@@ -143,3 +143,11 @@
 - Result: Lint/typecheck/tests/build passed; worker smoke exited safely without Supabase credentials; unauthenticated route redirected to login; demo-auth route rendered Prototype approval, company logos, generated mockups, selected templates, and QC score/warnings.
 - Problems: Real logo approval, render approval/rejection, rerender queueing, template switch, and offer-asset mutation were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-019 and continue with ISSUE-020.
+
+## 2026-06-07 16:44
+- Current issue: ISSUE-020 Offer export, message prepare, deals and commissions
+- What changed: Added commercial handoff service and Offer Studio panel for approved-offer HTML export, PDF export job queue, prepared message creation with manual/legal send gate, deal creation, visible commission calculation, and export/message/deal status summaries; added worker-side `offer.render_pdf` handler that writes a minimal manual PDF preview to `offer-exports` and records an export asset.
+- Commands run: `corepack pnpm --filter @souvenir-leadgen/web typecheck`, `corepack pnpm --filter @souvenir-leadgen/web lint`, `corepack pnpm --filter @souvenir-leadgen/worker test`, `corepack pnpm --filter @souvenir-leadgen/worker typecheck`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm worker`, `corepack pnpm exec next dev -p 3112`, `curl -I http://127.0.0.1:3112/app/offers/demo-offer`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3112/app/offers/demo-offer`.
+- Result: Lint/typecheck/tests/build passed; worker PDF unit test passed; worker smoke exited safely without Supabase credentials; unauthenticated offer route redirected to login; demo-auth route rendered Commercial handoff, export/message/deal actions, manual send gate, and commission summary.
+- Problems: Real HTML upload, PDF job execution, prepared message insert, deal/commission insert, and export asset mutation were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-020 and finish the 6-hour report checkpoint.

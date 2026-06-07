@@ -410,6 +410,11 @@ h1 {
   padding-left: 18px;
 }
 
+.handoff-list {
+  display: grid;
+  gap: 12px;
+}
+
 @media (max-width: 760px) {
   .shell {
     grid-template-columns: 1fr;

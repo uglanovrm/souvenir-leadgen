@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { WorkerJob } from "@souvenir-leadgen/shared";
 import type { CompletionProvider } from "./llm/generate-json.js";
+import { renderOfferPdfJob } from "./offer-export.js";
 import { generateDraftOffer } from "./offers.js";
 import { runPrototypeQcJob } from "./prototype-qc.js";
 import { renderPrototypeJob } from "./renderer.js";
@@ -68,7 +69,25 @@ export async function handleJob(
       };
     }
     case "offer.render_html":
-    case "offer.render_pdf":
+      return {
+        summary: `${job.type} accepted by local worker stub`,
+        details: {
+          safe_stub: true,
+          outbound_sent: false,
+        },
+      };
+    case "offer.render_pdf": {
+      if (!supabase) {
+        throw new Error("Supabase client is required for offer.render_pdf.");
+      }
+
+      const result = await renderOfferPdfJob(supabase, job.payload);
+
+      return {
+        summary: "offer.render_pdf exported a manual PDF preview",
+        details: result,
+      };
+    }
     case "message.prepare":
       return {
         summary: `${job.type} accepted by local worker stub`,

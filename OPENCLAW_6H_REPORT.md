@@ -25,6 +25,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-017 Sharp renderer, implemented with worker-side Sharp composition, placement/rotation, optional mask/shadow/highlight, watermark, generated mockup upload path, and `prototype_renders` insert path.
 - ISSUE-018 Prototype QC, implemented with worker-side rule scoring for logo size, safe-area overflow, missing watermark, low contrast, template mismatch, duplicate product type, QC score/warnings persistence, and final-offer metadata gating.
 - ISSUE-019 Prototype Studio UI, implemented with logo candidate approval, selected/ranked template switching, generated mockup review, QC score/warnings display, approve/reject/rerender actions, and offer-asset linking/removal rules for approved/rejected renders.
+- ISSUE-020 Offer export, message prepare, deals and commissions, implemented with approved-offer HTML export, PDF export job/worker path, prepared message creation with manual/legal send gate, deal creation, and visible commission calculation.
 
 ## Partial issues
 
@@ -61,6 +62,9 @@ None yet.
 - `corepack pnpm exec next dev -p 3111`
 - `curl -I http://127.0.0.1:3111/app/prototype-studio`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3111/app/prototype-studio`
+- `corepack pnpm exec next dev -p 3112`
+- `curl -I http://127.0.0.1:3112/app/offers/demo-offer`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3112/app/offers/demo-offer`
 - `corepack pnpm --filter @souvenir-leadgen/worker add sharp@0.34.5`
 - `corepack pnpm --filter @souvenir-leadgen/worker test`
 - `corepack pnpm --filter @souvenir-leadgen/worker typecheck`
@@ -140,6 +144,7 @@ None yet.
 - Real renderer storage download/upload and `prototype_renders` insert were not run because local Supabase is not configured in this environment.
 - Real prototype QC storage download/contrast scoring and `prototype_renders` updates were not run because local Supabase is not configured in this environment.
 - Real Prototype Studio approval actions, rerender queueing, template switching, and offer-asset mutations were not run because local Supabase is not configured in this environment.
+- Real commercial handoff mutations, including HTML upload, PDF job execution, prepared message insert, deal/commission insert, and export asset writes, were not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
