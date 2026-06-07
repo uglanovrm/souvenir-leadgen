@@ -32,7 +32,20 @@ export const workerJobSchema = z.object({
   maxAttempts: z.number().int().min(1).default(3),
 });
 
+export const productPackageFormSchema = z.object({
+  name: z.string().trim().min(2),
+  slug: z.string().trim().min(2).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  description: z.string().trim().max(2000).default(""),
+  technology: z.string().trim().min(2),
+  minQuantity: z.number().int().min(1),
+  priceFrom: z.number().min(0),
+  productionDays: z.number().int().min(1),
+  targetIndustries: z.string().trim().default(""),
+  marginPercent: z.number().min(0).default(0),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
 export type WorkerJob = z.infer<typeof workerJobSchema>;
+export type ProductPackageFormInput = z.infer<typeof productPackageFormSchema>;

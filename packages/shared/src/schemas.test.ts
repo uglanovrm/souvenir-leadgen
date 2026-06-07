@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appRoleSchema, workerJobSchema } from "./schemas.js";
+import { appRoleSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
 
 describe("shared schemas", () => {
   it("accepts supported application roles", () => {
@@ -16,5 +16,18 @@ describe("shared schemas", () => {
 
     expect(job.payload).toEqual({});
     expect(job.maxAttempts).toBe(3);
+  });
+
+  it("validates product package form input", () => {
+    const input = productPackageFormSchema.parse({
+      name: "Welcome Pack",
+      slug: "welcome-pack",
+      technology: "UV print",
+      minQuantity: 50,
+      priceFrom: 790,
+      productionDays: 7,
+    });
+
+    expect(input.targetIndustries).toBe("");
   });
 });

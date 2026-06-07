@@ -68,6 +68,21 @@ textarea {
   font-weight: 700;
 }
 
+.profile {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
+.profile strong {
+  color: var(--foreground);
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
 .main {
   padding: 28px;
 }
@@ -122,6 +137,105 @@ h1 {
   background: #fff8eb;
   color: var(--warning);
   padding: 12px 14px;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button {
+  background: var(--accent);
+  border: 0;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 14px;
+}
+
+.button.secondary {
+  background: #edf2f7;
+  color: var(--foreground);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--line);
+  padding: 12px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  min-height: 40px;
+  padding: 9px 10px;
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 84px;
+  resize: vertical;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  display: inline-flex;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.pill.active {
+  border-color: #99d8ce;
+  color: var(--accent-strong);
 }
 
 @media (max-width: 760px) {

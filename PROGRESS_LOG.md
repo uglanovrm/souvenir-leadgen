@@ -23,3 +23,11 @@
 - Result: Structural checks found 22 tables, 7 buckets, and seed demo records; lint/typecheck/tests/build passed.
 - Problems: Local `supabase` and `psql` CLIs are not installed, so `supabase db reset` could not be executed in this environment.
 - Next: Commit schema/storage layer and continue with ISSUE-004 Auth and roles.
+
+## 2026-06-07 15:11
+- Current issue: ISSUE-004 Auth and roles and ISSUE-005 Product catalog CRUD
+- What changed: Added `/login`, `/app` workspace shell, Next 16 proxy auth guard, Supabase server client helper, profile/role loader, role-aware sidebar permissions, catalog view model, product package create/edit/deactivate server actions, product list UI, edit route, and shared package form validation.
+- Commands run: `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3101`, `corepack pnpm exec next dev -p 3102`, `curl -I http://127.0.0.1:3101/login`, `curl -I http://127.0.0.1:3101/app/products`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3102/app/products`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3102/app/products/demo-welcome-pack/edit`.
+- Result: Lint/typecheck/tests/build passed; `/login` returned HTTP 200; unauthenticated `/app/products` redirected to login; catalog and edit pages rendered demo/read-only state with fake auth cookie.
+- Problems: Real Supabase auth/catalog mutations were not executed because local Supabase is not running and env values are not configured.
+- Next: Commit auth/catalog layer and continue with ISSUE-006 Portfolio asset library.
