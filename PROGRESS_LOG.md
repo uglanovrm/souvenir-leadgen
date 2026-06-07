@@ -119,3 +119,11 @@
 - Result: Lint/typecheck/tests/build passed; shared tests now cover selector ranking, inactive template exclusion, and poor aspect penalty; unauthenticated route redirected to login; demo-auth route rendered selection brief, ranked templates, scores, and explanations including product/technology/tag/quality/aspect signals.
 - Problems: Real selector against Supabase data was not exercised because local Supabase env is not configured.
 - Next: Commit ISSUE-016 and continue with ISSUE-017 Sharp renderer.
+
+## 2026-06-07 16:26
+- Current issue: ISSUE-017 Sharp renderer
+- What changed: Added `sharp` to worker dependencies, pure Sharp renderer with placement/rotation, optional mask, optional shadow/highlight overlays, SVG watermark, `prototype.render` worker handler, Supabase storage download/upload path, `prototype_renders` insert path, payload validation, and in-memory renderer unit test.
+- Commands run: `corepack pnpm --filter @souvenir-leadgen/worker add sharp@0.34.5`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm worker`.
+- Result: Lint/typecheck/tests/build passed; worker renderer test generated a watermarked PNG with expected dimensions; worker smoke started with Sharp import and exited safely in stub mode without Supabase credentials.
+- Problems: Real storage download/upload and `prototype_renders` insert were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-017 and continue with ISSUE-018 Prototype QC.

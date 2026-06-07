@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { WorkerJob } from "@souvenir-leadgen/shared";
 import type { CompletionProvider } from "./llm/generate-json.js";
 import { generateDraftOffer } from "./offers.js";
+import { renderPrototypeJob } from "./renderer.js";
 
 export type JobResult = {
   summary: string;
@@ -41,7 +42,18 @@ export async function handleJob(
       };
     }
     case "prototype.create_brief":
-    case "prototype.render":
+    case "prototype.render": {
+      if (!supabase) {
+        throw new Error("Supabase client is required for prototype.render.");
+      }
+
+      const result = await renderPrototypeJob(supabase, job.payload);
+
+      return {
+        summary: "prototype.render generated watermarked mockups",
+        details: result,
+      };
+    }
     case "prototype.qc":
     case "offer.render_html":
     case "offer.render_pdf":
