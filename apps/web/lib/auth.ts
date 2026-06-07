@@ -17,8 +17,8 @@ export async function getCurrentProfile(): Promise<CurrentProfile> {
     return {
       id: "demo-user",
       email: null,
-      fullName: "Demo producer",
-      role: "producer",
+      fullName: "Demo admin",
+      role: "admin",
       source: "demo",
     };
   }

@@ -55,9 +55,26 @@ export const portfolioAssetFormSchema = z.object({
   allowedForOffer: z.boolean().default(false),
 });
 
+export const campaignFormSchema = z.object({
+  name: z.string().trim().min(2),
+  description: z.string().trim().max(2000).default(""),
+  targetIndustries: z.string().trim().default(""),
+});
+
+export const csvLeadRowSchema = z.object({
+  name: z.string().trim().min(1),
+  website: z.string().trim().optional().default(""),
+  inn: z.string().trim().optional().default(""),
+  contactName: z.string().trim().optional().default(""),
+  contactEmail: z.string().trim().optional().default(""),
+  industry: z.string().trim().optional().default(""),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
 export type WorkerJob = z.infer<typeof workerJobSchema>;
 export type ProductPackageFormInput = z.infer<typeof productPackageFormSchema>;
 export type PortfolioAssetFormInput = z.infer<typeof portfolioAssetFormSchema>;
+export type CampaignFormInput = z.infer<typeof campaignFormSchema>;
+export type CsvLeadRowInput = z.infer<typeof csvLeadRowSchema>;

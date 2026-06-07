@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appRoleSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
+import { appRoleSchema, campaignFormSchema, csvLeadRowSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
 
 describe("shared schemas", () => {
   it("accepts supported application roles", () => {
@@ -40,5 +40,10 @@ describe("shared schemas", () => {
 
     expect(input.qualityScore).toBe(82);
     expect(input.allowedForOffer).toBe(true);
+  });
+
+  it("validates campaign and CSV lead inputs", () => {
+    expect(campaignFormSchema.parse({ name: "June HR" }).targetIndustries).toBe("");
+    expect(csvLeadRowSchema.parse({ name: "Acme", website: "https://acme.test" }).name).toBe("Acme");
   });
 });

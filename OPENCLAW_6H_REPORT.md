@@ -2,7 +2,7 @@
 
 ## Summary
 
-Autonomous run started on 2026-06-07. The repository now has a verified monorepo foundation, a Supabase-first schema/storage baseline, a working role-aware app/catalog slice, and a portfolio asset library slice.
+Autonomous run started on 2026-06-07. The repository now has a verified monorepo foundation, a Supabase-first schema/storage baseline, a working role-aware app/catalog slice, a portfolio asset library slice, and a campaign/CSV import slice.
 
 ## Completed issues
 
@@ -12,6 +12,7 @@ Autonomous run started on 2026-06-07. The repository now has a verified monorepo
 - ISSUE-004 Auth and roles, verified through middleware/proxy redirect and role-aware demo shell.
 - ISSUE-005 Product catalog CRUD, implemented as Supabase-backed create/edit/deactivate actions with demo/read-only fallback.
 - ISSUE-006 Portfolio asset library, implemented as Supabase Storage-backed upload/metadata actions with demo/read-only fallback.
+- ISSUE-007 Campaign builder and CSV import, implemented with campaign create UI, CSV parser, import upload flow, organization dedupe logic, and campaign lead upsert.
 
 ## Partial issues
 
@@ -42,6 +43,10 @@ None yet.
 - `corepack pnpm exec next dev -p 3103`
 - `curl -I http://127.0.0.1:3103/app/assets`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3103/app/assets`
+- `corepack pnpm exec next dev -p 3104`
+- `curl -I http://127.0.0.1:3104/app/campaigns`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns/demo-campaign`
 
 ## Test results
 
@@ -60,6 +65,7 @@ None yet.
 - Catalog smoke: `/app/products` rendered demo product package with actions disabled when Supabase env is missing.
 - Edit smoke: `/app/products/demo-welcome-pack/edit` rendered edit form in demo/read-only mode.
 - Asset smoke: unauthenticated `/app/assets` redirected to login; authenticated demo request rendered upload form, demo asset, metadata form, and offer-ready flag.
+- Campaign smoke: unauthenticated `/app/campaigns` redirected to login; authenticated demo request rendered campaign list, CSV import form, and demo lead list.
 
 ## Known problems
 
@@ -68,6 +74,7 @@ None yet.
 - `psql` is not installed, so the migration could not be executed against a local Postgres instance.
 - Real Supabase auth/catalog mutations were not run because local Supabase is not configured in this environment.
 - Real portfolio upload/storage mutation was not run because local Supabase is not configured in this environment.
+- Real CSV upload/import mutation was not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
@@ -75,4 +82,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-007 Campaign builder and CSV import.
+ISSUE-008 Jobs table and local worker.

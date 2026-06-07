@@ -39,3 +39,11 @@
 - Result: Lint/typecheck/tests/build passed; unauthenticated `/app/assets` redirected to login; asset gallery rendered demo asset, upload form, metadata form, and offer-ready flag in read-only mode.
 - Problems: Real upload/storage mutation was not executed because local Supabase and env values are not configured.
 - Next: Commit portfolio asset library and continue with ISSUE-007 Campaign builder and CSV import.
+
+## 2026-06-07 15:20
+- Current issue: ISSUE-007 Campaign builder and CSV import
+- What changed: Added campaign dedupe migration for `organizations.inn`, campaign list/detail UI, create campaign action, CSV parser, CSV upload/import service, import storage path convention, organization dedupe by INN or name+website, campaign lead upsert, demo campaign fallback, and shared campaign/CSV validation.
+- Commands run: `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3104`, `curl -I http://127.0.0.1:3104/app/campaigns`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3104/app/campaigns/demo-campaign`.
+- Result: Lint/typecheck/tests/build passed; unauthenticated campaigns route redirected to login; campaign list and detail pages rendered demo create/import/read-only states and lead list.
+- Problems: Real CSV upload/import was not executed because local Supabase and env values are not configured.
+- Next: Commit campaign/import layer and continue with ISSUE-008 Jobs table and local worker.
