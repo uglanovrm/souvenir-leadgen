@@ -10,7 +10,7 @@ describe("shared schemas", () => {
   it("validates a queued worker job", () => {
     const job = workerJobSchema.parse({
       id: "00000000-0000-4000-8000-000000000001",
-      type: "score_lead",
+      type: "lead.score",
       status: "queued",
     });
 

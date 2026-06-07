@@ -3,15 +3,21 @@ import { z } from "zod";
 export const appRoleSchema = z.enum(["admin", "producer", "agent", "manager"]);
 
 export const jobTypeSchema = z.enum([
-  "score_lead",
-  "generate_offer",
-  "render_mockup",
-  "qc_prototype",
+  "lead.import",
+  "lead.classify",
+  "lead.score",
+  "offer.generate",
+  "prototype.create_brief",
+  "prototype.render",
+  "prototype.qc",
+  "offer.render_html",
+  "offer.render_pdf",
+  "message.prepare",
 ]);
 
 export const jobStatusSchema = z.enum([
   "queued",
-  "processing",
+  "running",
   "succeeded",
   "failed",
   "cancelled",
