@@ -98,6 +98,16 @@ export const offerEditFormSchema = z.object({
   warningsAccepted: z.boolean().default(false),
 });
 
+export const mockupSourceStatusSchema = z.enum(["draft", "normalized", "certified", "rejected"]);
+
+export const mockupSourceFormSchema = z.object({
+  name: z.string().trim().min(2).max(160),
+  author: z.string().trim().max(160).default(""),
+  license: z.string().trim().max(160).default(""),
+  notes: z.string().trim().max(2000).default(""),
+  status: mockupSourceStatusSchema.default("draft"),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
@@ -109,3 +119,5 @@ export type CsvLeadRowInput = z.infer<typeof csvLeadRowSchema>;
 export type OfferGeneratePayload = z.infer<typeof offerGeneratePayloadSchema>;
 export type OfferDraft = z.infer<typeof offerDraftSchema>;
 export type OfferEditFormInput = z.infer<typeof offerEditFormSchema>;
+export type MockupSourceStatus = z.infer<typeof mockupSourceStatusSchema>;
+export type MockupSourceFormInput = z.infer<typeof mockupSourceFormSchema>;

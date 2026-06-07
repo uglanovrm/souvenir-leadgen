@@ -87,3 +87,11 @@
 - Result: Lint/typecheck/tests/build passed; unauthenticated offers route redirected to login; demo-auth offers list rendered generated offer and review link; demo-auth editor rendered offer text editor, package selector, portfolio asset selector, warnings panel, warning acceptance checkbox, save draft button, and approve button.
 - Problems: Real save/approve mutations were not executed because local Supabase env is not configured; demo mode correctly renders read-only disabled controls.
 - Next: Commit ISSUE-012 and continue with ISSUE-013 PSD source library.
+
+## 2026-06-07 15:57
+- Current issue: ISSUE-013 PSD source library
+- What changed: Added mockup source lifecycle schema, migration for `status`/`author`/`license`/`metadata`, Supabase-backed PSD source library service, `/app/mockup-sources` page, PSD upload action, source metadata/status update action, runtime template source-link action, nav entry, and demo read-only fallback.
+- Commands run: `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3107`, `curl -I http://127.0.0.1:3107/app/mockup-sources`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3107/app/mockup-sources`.
+- Result: Lint/typecheck/tests/build passed; shared tests now cover mockup source lifecycle metadata; unauthenticated route redirected to login; demo-auth route rendered PSD upload form, status controls, demo PSD source, and runtime template source link controls.
+- Problems: Real PSD upload, metadata update, and runtime template link mutation were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-013 and continue with ISSUE-014 Runtime mockup pack manager.

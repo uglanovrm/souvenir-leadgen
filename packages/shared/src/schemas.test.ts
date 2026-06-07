@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appRoleSchema, campaignFormSchema, csvLeadRowSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
+import { appRoleSchema, campaignFormSchema, csvLeadRowSchema, mockupSourceFormSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
 
 describe("shared schemas", () => {
   it("accepts supported application roles", () => {
@@ -45,5 +45,17 @@ describe("shared schemas", () => {
   it("validates campaign and CSV lead inputs", () => {
     expect(campaignFormSchema.parse({ name: "June HR" }).targetIndustries).toBe("");
     expect(csvLeadRowSchema.parse({ name: "Acme", website: "https://acme.test" }).name).toBe("Acme");
+  });
+
+  it("validates mockup source lifecycle metadata", () => {
+    const input = mockupSourceFormSchema.parse({
+      name: "Mug source PSD",
+      status: "certified",
+      author: "Internal",
+      license: "Owned",
+    });
+
+    expect(input.status).toBe("certified");
+    expect(input.notes).toBe("");
   });
 });

@@ -191,6 +191,14 @@ h1 {
   font-weight: 700;
 }
 
+.table select {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  min-height: 36px;
+  padding: 7px 9px;
+  width: 100%;
+}
+
 .table-note {
   color: var(--muted);
   font-size: 12px;
