@@ -44,8 +44,20 @@ export const productPackageFormSchema = z.object({
   marginPercent: z.number().min(0).default(0),
 });
 
+export const portfolioAssetFormSchema = z.object({
+  title: z.string().trim().min(2),
+  packageId: z.string().uuid().optional().or(z.literal("")),
+  technology: z.string().trim().default(""),
+  industry: z.string().trim().default(""),
+  productType: z.string().trim().default(""),
+  material: z.string().trim().default(""),
+  qualityScore: z.number().min(0).max(100).default(0),
+  allowedForOffer: z.boolean().default(false),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
 export type WorkerJob = z.infer<typeof workerJobSchema>;
 export type ProductPackageFormInput = z.infer<typeof productPackageFormSchema>;
+export type PortfolioAssetFormInput = z.infer<typeof portfolioAssetFormSchema>;

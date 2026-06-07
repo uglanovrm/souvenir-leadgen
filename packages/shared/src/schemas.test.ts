@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appRoleSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
+import { appRoleSchema, portfolioAssetFormSchema, productPackageFormSchema, workerJobSchema } from "./schemas.js";
 
 describe("shared schemas", () => {
   it("accepts supported application roles", () => {
@@ -29,5 +29,16 @@ describe("shared schemas", () => {
     });
 
     expect(input.targetIndustries).toBe("");
+  });
+
+  it("validates portfolio asset metadata", () => {
+    const input = portfolioAssetFormSchema.parse({
+      title: "Mug photo",
+      qualityScore: 82,
+      allowedForOffer: true,
+    });
+
+    expect(input.qualityScore).toBe(82);
+    expect(input.allowedForOffer).toBe(true);
   });
 });

@@ -9,6 +9,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { href: "/app", label: "Dashboard", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/products", label: "Products", roles: ["admin", "producer", "agent", "manager"] },
+  { href: "/app/assets", label: "Assets", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/campaigns", label: "Campaigns", roles: ["admin", "agent", "manager"] },
   { href: "/app/offers", label: "Offers", roles: ["admin", "producer", "agent", "manager"] },
   { href: "/app/prototype-studio", label: "Prototype Studio", roles: ["admin", "producer", "manager"] },
@@ -21,6 +22,10 @@ export function canSeeNavItem(role: AppRole, item: NavItem) {
 }
 
 export function canManageCatalog(role: AppRole) {
+  return role === "admin" || role === "producer";
+}
+
+export function canManageAssets(role: AppRole) {
   return role === "admin" || role === "producer";
 }
 

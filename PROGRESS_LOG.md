@@ -31,3 +31,11 @@
 - Result: Lint/typecheck/tests/build passed; `/login` returned HTTP 200; unauthenticated `/app/products` redirected to login; catalog and edit pages rendered demo/read-only state with fake auth cookie.
 - Problems: Real Supabase auth/catalog mutations were not executed because local Supabase is not running and env values are not configured.
 - Next: Commit auth/catalog layer and continue with ISSUE-006 Portfolio asset library.
+
+## 2026-06-07 15:15
+- Current issue: ISSUE-006 Portfolio asset library
+- What changed: Added role-aware Assets navigation, portfolio asset service, upload action to `portfolio-assets`, metadata update action, offer-allowed asset query helper, asset library UI, demo/read-only fallback, and shared metadata validation.
+- Commands run: `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3103`, `curl -I http://127.0.0.1:3103/app/assets`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3103/app/assets`.
+- Result: Lint/typecheck/tests/build passed; unauthenticated `/app/assets` redirected to login; asset gallery rendered demo asset, upload form, metadata form, and offer-ready flag in read-only mode.
+- Problems: Real upload/storage mutation was not executed because local Supabase and env values are not configured.
+- Next: Commit portfolio asset library and continue with ISSUE-007 Campaign builder and CSV import.
