@@ -1,0 +1,24 @@
+{
+  "name": "@souvenir-leadgen/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@souvenir-leadgen/shared": "workspace:*",
+    "@supabase/supabase-js": "^2.87.1",
+    "tsx": "^4.21.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.13"
+  }
+}

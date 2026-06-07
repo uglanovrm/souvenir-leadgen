@@ -1,0 +1,19 @@
+{
+  "name": "souvenir-leadgen",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.5.2",
+  "scripts": {
+    "dev": "corepack pnpm --filter @souvenir-leadgen/web dev",
+    "build": "corepack pnpm --filter @souvenir-leadgen/shared build && corepack pnpm --filter @souvenir-leadgen/worker build && corepack pnpm --filter @souvenir-leadgen/web build",
+    "lint": "corepack pnpm --filter @souvenir-leadgen/web lint && corepack pnpm --filter @souvenir-leadgen/worker lint && corepack pnpm --filter @souvenir-leadgen/shared lint",
+    "typecheck": "corepack pnpm --filter @souvenir-leadgen/web typecheck && corepack pnpm --filter @souvenir-leadgen/worker typecheck && corepack pnpm --filter @souvenir-leadgen/shared typecheck",
+    "test": "corepack pnpm --filter @souvenir-leadgen/shared test && corepack pnpm --filter @souvenir-leadgen/worker test",
+    "worker": "corepack pnpm --filter @souvenir-leadgen/worker dev"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.13"
+  }
+}
