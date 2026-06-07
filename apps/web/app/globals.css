@@ -332,6 +332,11 @@ h1 {
   color: var(--accent-strong);
 }
 
+.pill.danger {
+  border-color: #f7d79b;
+  color: var(--warning);
+}
+
 @media (max-width: 760px) {
   .shell {
     grid-template-columns: 1fr;

@@ -20,6 +20,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-012 Offer Studio UI, implemented with offer list, review/edit screen, package selector, portfolio asset selector, warnings panel, save draft action, and approval requiring explicit warning acceptance.
 - ISSUE-013 PSD source library, implemented with source lifecycle schema/migration, PSD upload service/page, metadata/status editing, and runtime template source linking.
 - ISSUE-014 Runtime mockup pack manager, implemented with runtime pack schema/migration, layer upload service/page, geometry configuration, active/status fields, and safe-area/placement preview overlay.
+- ISSUE-015 Logo upload and quality scoring, implemented with deterministic PNG/JPEG/SVG inspection, quality score/warnings, render-block metadata, logo upload UI/service, and approve/reject actions.
 
 ## Partial issues
 
@@ -47,6 +48,9 @@ None yet.
 - `corepack pnpm exec next dev -p 3108`
 - `curl -I http://127.0.0.1:3108/app/mockup-templates`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3108/app/mockup-templates`
+- `corepack pnpm exec next dev -p 3109`
+- `curl -I http://127.0.0.1:3109/app/brand-assets`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3109/app/brand-assets`
 - `corepack pnpm exec next dev -p 3105`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
@@ -98,6 +102,7 @@ None yet.
 - Offer Studio smoke: unauthenticated `/app/offers` redirected to login; demo-auth `/app/offers` rendered generated offer queue; demo-auth `/app/offers/demo-offer` rendered editor, selectors, warnings, save, and approve controls.
 - PSD source library smoke: unauthenticated `/app/mockup-sources` redirected to login; demo-auth route rendered PSD upload, lifecycle status controls, demo source, and runtime template source link controls.
 - Runtime mockup pack smoke: unauthenticated `/app/mockup-templates` redirected to login; demo-auth route rendered layer upload controls, geometry controls, safe-area overlay, placement overlay, active/status fields, product type, technology, and quality score.
+- Logo library smoke: unauthenticated `/app/brand-assets` redirected to login; demo-auth route rendered logo upload form, organization selector, candidate logo, score warning, render-block notice, approve, and reject controls.
 
 ## Known problems
 
@@ -115,6 +120,7 @@ None yet.
 - Real offer save/approve mutations were not run because local Supabase is not configured in this environment.
 - Real PSD upload, PSD metadata update, and runtime template source-link mutation were not run because local Supabase is not configured in this environment.
 - Real runtime layer upload and template insert were not run because local Supabase is not configured in this environment.
+- Real logo upload, brand asset insert, approve, and reject mutations were not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
@@ -122,4 +128,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-015 Logo upload and scoring.
+ISSUE-016 Template selector.

@@ -103,3 +103,11 @@
 - Result: Initial typecheck/build failed on optional layer file typing, then passed after normalizing optional files to null; lint/typecheck/tests/build passed; unauthenticated route redirected to login; demo-auth route rendered runtime pack form, layer uploads, geometry controls, preview unavailable placeholder, safe-area overlay, placement overlay, active/status/product type/technology/quality pills.
 - Problems: Real layer upload and template insert were not executed because local Supabase env is not configured; no PSD rendering or Sharp renderer was introduced.
 - Next: Commit ISSUE-014 and continue with ISSUE-015 Logo upload and scoring.
+
+## 2026-06-07 16:18
+- Current issue: ISSUE-015 Logo upload and quality scoring
+- What changed: Added deterministic logo quality scorer, PNG/JPEG/SVG metadata parser, company logo service, `/app/brand-assets` page, upload action to `company-logos`, `brand_assets` insert path, warnings/render-block metadata, approve action that demotes previous approved logos for the same organization, reject action, nav entry, and demo read-only fallback.
+- Commands run: `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3109`, `curl -I http://127.0.0.1:3109/app/brand-assets`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3109/app/brand-assets`.
+- Result: Lint/typecheck/tests/build passed; shared tests now cover logo quality scoring; unauthenticated route redirected to login; demo-auth route rendered organization selector, PNG/JPG/SVG upload form, logo candidate card, score 52 warning, automatic render blocked notice, approve button, and reject button.
+- Problems: Real logo upload, brand asset insert, approve, and reject mutations were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-015 and continue with ISSUE-016 Template selector.
