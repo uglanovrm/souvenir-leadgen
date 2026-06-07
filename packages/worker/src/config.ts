@@ -8,6 +8,8 @@ const envSchema = z.object({
   WORKER_ID: z.string().min(1).default("local-worker-1"),
   WORKER_LEASE_MS: z.coerce.number().int().min(1000).default(60000),
   WORKER_RUN_ONCE: z.coerce.boolean().default(false),
+  LMSTUDIO_BASE_URL: z.string().url().optional(),
+  LMSTUDIO_MODEL: z.string().min(1).optional(),
 });
 
 export function loadWorkerConfig(env: NodeJS.ProcessEnv = process.env) {

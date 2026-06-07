@@ -2,7 +2,7 @@
 
 ## Summary
 
-Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP foundation: monorepo, Supabase schema/storage, auth/roles, catalog, portfolio assets, campaigns/CSV import, and local worker loop.
+Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP foundation: monorepo, Supabase schema/storage, auth/roles, catalog, portfolio assets, campaigns/CSV import, and local worker loop. P1 has started with the local LM Studio provider.
 
 ## Completed issues
 
@@ -14,6 +14,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-006 Portfolio asset library, implemented as Supabase Storage-backed upload/metadata actions with demo/read-only fallback.
 - ISSUE-007 Campaign builder and CSV import, implemented with campaign create UI, CSV parser, import upload flow, organization dedupe logic, and campaign lead upsert.
 - ISSUE-008 Jobs table and local worker, implemented with polling, locking, retries, success/failure transitions, and structured logs.
+- ISSUE-009 LM Studio client and zod validation, implemented with OpenAI-compatible local provider, typed `generateJson`, repair retry, fixtures, and tests.
 
 ## Partial issues
 
@@ -69,6 +70,7 @@ None yet.
 - Asset smoke: unauthenticated `/app/assets` redirected to login; authenticated demo request rendered upload form, demo asset, metadata form, and offer-ready flag.
 - Campaign smoke: unauthenticated `/app/campaigns` redirected to login; authenticated demo request rendered campaign list, CSV import form, and demo lead list.
 - Worker smoke: without Supabase credentials the worker emitted structured `worker.start` and `worker.stub_exit` logs and exited with code 0.
+- LM Studio JSON tests: success, invalid JSON repair, and failed repair paths passed.
 
 ## Known problems
 
@@ -79,6 +81,7 @@ None yet.
 - Real portfolio upload/storage mutation was not run because local Supabase is not configured in this environment.
 - Real CSV upload/import mutation was not run because local Supabase is not configured in this environment.
 - Real worker polling was not run because local Supabase service role env is not configured in this environment.
+- Real LM Studio call was not run because local LM Studio is not configured/running in this environment.
 
 ## Manual steps needed
 
@@ -86,4 +89,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-009 LM Studio client.
+ISSUE-010 Lead scoring v1.

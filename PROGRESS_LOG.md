@@ -55,3 +55,11 @@
 - Result: Worker smoke exited safely without credentials and emitted structured logs; lint/typecheck/tests/build passed.
 - Problems: Real job polling was not executed because local Supabase and service role env are not configured.
 - Next: Commit P0 worker layer and continue with ISSUE-009 LM Studio client.
+
+## 2026-06-07 15:26
+- Current issue: ISSUE-009 LM Studio client and zod validation
+- What changed: Added LM Studio OpenAI-compatible provider, `generateJson` helper with zod validation and one repair retry, stub provider fixtures, JSON generation tests, LM Studio env config, and worker `offer.generate` behavior that fails gracefully when LM Studio is not configured.
+- Commands run: `corepack pnpm worker`, `corepack pnpm test`, `corepack pnpm typecheck`, `corepack pnpm lint`, `corepack pnpm build`.
+- Result: Worker smoke exited safely without credentials; JSON generation tests covered success, repair retry, and failed repair; lint/typecheck/tests/build passed.
+- Problems: Real LM Studio network call was not executed because local LM Studio is not configured/running in this environment.
+- Next: Commit LM Studio client and continue with ISSUE-010 Lead scoring v1.

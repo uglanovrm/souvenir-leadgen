@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { loadWorkerConfig } from "./config.js";
 import { handleJob } from "./handlers.js";
 import { claimNextJob, markJobFailedOrRetry, markJobSucceeded } from "./jobs.js";
+import { LmStudioProvider } from "./llm/lmstudio.js";
 import { log } from "./logger.js";
 
 const config = loadWorkerConfig();
@@ -25,6 +26,9 @@ const supabase = createClient(config.NEXT_PUBLIC_SUPABASE_URL, config.SUPABASE_S
     autoRefreshToken: false,
   },
 });
+const llmProvider = config.LMSTUDIO_BASE_URL && config.LMSTUDIO_MODEL
+  ? new LmStudioProvider({ baseUrl: config.LMSTUDIO_BASE_URL, model: config.LMSTUDIO_MODEL })
+  : undefined;
 
 async function processOneJob() {
   const job = await claimNextJob(supabase, config.WORKER_ID, config.WORKER_LEASE_MS);
@@ -42,7 +46,7 @@ async function processOneJob() {
   });
 
   try {
-    const result = await handleJob(job);
+    const result = await handleJob(job, llmProvider);
     await markJobSucceeded(supabase, job.id, result);
     log("info", "job.succeeded", { jobId: job.id, type: job.type });
   } catch (error) {
