@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getCatalogViewModel } from "../../../lib/catalog";
 import { createPackageAction, deactivatePackageAction } from "./actions";
 
@@ -48,9 +49,9 @@ export default async function ProductsPage() {
                 </td>
                 <td>
                   {catalog.source === "supabase" && catalog.canManage ? (
-                    <a className="button secondary" href={`/app/products/${item.id}/edit`}>
+                    <Link className="button secondary" href={`/app/products/${item.id}/edit`}>
                       Edit
-                    </a>
+                    </Link>
                   ) : null}
                   <form action={deactivatePackageAction}>
                     <input type="hidden" name="id" value={item.id} />

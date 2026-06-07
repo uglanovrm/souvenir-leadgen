@@ -79,3 +79,11 @@
 - Result: Worker/shared tests passed, including 8 worker tests; full lint/typecheck/tests/build passed; worker smoke exited safely without Supabase credentials; offer generation tests validate missing Avito warning, draft offer row creation, selected package/portfolio asset IDs, and rejection of package IDs outside DB context.
 - Problems: Real Supabase draft insert and real LM Studio generation were not executed because local Supabase and LM Studio are not configured/running in this environment.
 - Next: Commit ISSUE-011 and continue with ISSUE-012 Offer Studio UI.
+
+## 2026-06-07 15:50
+- Current issue: ISSUE-012 Offer Studio UI
+- What changed: Added `/app/offers` list, `/app/offers/[id]` editor, offer service/actions, package selector, portfolio asset selector, warnings panel, save draft action, approve action with explicit warning acceptance, responsive studio layout CSS, and Next `Link` navigation cleanup.
+- Commands run: `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3106`, `curl -I http://127.0.0.1:3106/app/offers`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3106/app/offers`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3106/app/offers/demo-offer`.
+- Result: Lint/typecheck/tests/build passed; unauthenticated offers route redirected to login; demo-auth offers list rendered generated offer and review link; demo-auth editor rendered offer text editor, package selector, portfolio asset selector, warnings panel, warning acceptance checkbox, save draft button, and approve button.
+- Problems: Real save/approve mutations were not executed because local Supabase env is not configured; demo mode correctly renders read-only disabled controls.
+- Next: Commit ISSUE-012 and continue with ISSUE-013 PSD source library.

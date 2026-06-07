@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getCurrentProfile } from "../../lib/auth";
 import { canSeeNavItem, navItems } from "../../lib/permissions";
 
@@ -15,9 +16,9 @@ export default async function AppLayout({
         <div className="brand">Souvenir Lead-Gen</div>
         <nav className="nav" aria-label="Main navigation">
           {visibleItems.map((item) => (
-            <a key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href}>
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="profile">

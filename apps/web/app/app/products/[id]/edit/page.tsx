@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductPackageForEdit } from "../../../../../lib/catalog";
 import { updatePackageAction } from "./actions";
@@ -24,9 +25,9 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
           <p className="eyebrow">Catalog</p>
           <h1>Edit product package</h1>
         </div>
-        <a className="button secondary" href="/app/products">
+        <Link className="button secondary" href="/app/products">
           Back
-        </a>
+        </Link>
       </div>
 
       {view.warning ? <div className="status">{view.warning}</div> : null}

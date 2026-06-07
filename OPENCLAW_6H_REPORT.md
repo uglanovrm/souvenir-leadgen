@@ -17,6 +17,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-009 LM Studio client and zod validation, implemented with OpenAI-compatible local provider, typed `generateJson`, repair retry, fixtures, and tests.
 - ISSUE-010 Lead scoring v1, implemented with deterministic scoring, breakdown, explanation, UI action, and Supabase update/audit path.
 - ISSUE-011 Offer generator v1, implemented with DB context assembly, LM Studio JSON draft validation, missing Avito warning propagation, context-only package/asset ID guard, draft offer insert, and selected portfolio asset linking.
+- ISSUE-012 Offer Studio UI, implemented with offer list, review/edit screen, package selector, portfolio asset selector, warnings panel, save draft action, and approval requiring explicit warning acceptance.
 
 ## Partial issues
 
@@ -34,6 +35,10 @@ None yet.
 - `corepack pnpm --filter @souvenir-leadgen/worker test`
 - `corepack pnpm --filter @souvenir-leadgen/shared test`
 - `corepack pnpm --filter @souvenir-leadgen/worker typecheck`
+- `corepack pnpm exec next dev -p 3106`
+- `curl -I http://127.0.0.1:3106/app/offers`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3106/app/offers`
+- `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3106/app/offers/demo-offer`
 - `corepack pnpm exec next dev -p 3105`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
@@ -82,6 +87,7 @@ None yet.
 - Lead scoring smoke: campaign detail rendered score 75, explanation, and score action in demo/read-only mode.
 - Offer generation tests: missing Avito evidence produces a warning; validated LM Studio JSON output creates a draft offer row and selected portfolio asset link; package IDs outside DB context are rejected before insert.
 - Offer generator full gate: lint, typecheck, tests, worker smoke, and build passed.
+- Offer Studio smoke: unauthenticated `/app/offers` redirected to login; demo-auth `/app/offers` rendered generated offer queue; demo-auth `/app/offers/demo-offer` rendered editor, selectors, warnings, save, and approve controls.
 
 ## Known problems
 
@@ -96,6 +102,7 @@ None yet.
 - Real Supabase score update was not run because local Supabase is not configured in this environment.
 - Real Supabase offer draft insert was not run because local Supabase is not configured in this environment.
 - Real LM Studio offer generation was not run because local LM Studio is not configured/running in this environment.
+- Real offer save/approve mutations were not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 
@@ -103,4 +110,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-012 Offer Studio UI.
+ISSUE-013 PSD source library.

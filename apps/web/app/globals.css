@@ -28,8 +28,11 @@ a {
 
 button,
 input,
-select,
 textarea {
+  font: inherit;
+}
+
+select {
   font: inherit;
 }
 
@@ -188,6 +191,12 @@ h1 {
   font-weight: 700;
 }
 
+.table-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
 .form-grid {
   display: grid;
   gap: 12px;
@@ -206,6 +215,7 @@ h1 {
 }
 
 .field input,
+.field select,
 .field textarea {
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -219,9 +229,41 @@ h1 {
   resize: vertical;
 }
 
+.offer-body {
+  min-height: 360px;
+}
+
 .stack {
   display: grid;
   gap: 16px;
+}
+
+.studio-layout {
+  align-items: start;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+}
+
+.check-list {
+  display: grid;
+  gap: 8px;
+}
+
+.check-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.check-row input {
+  margin-top: 3px;
+}
+
+.warning-accept {
+  color: var(--warning);
+  font-weight: 700;
 }
 
 .pill {
@@ -250,5 +292,9 @@ h1 {
 
   .main {
     padding: 20px;
+  }
+
+  .studio-layout {
+    grid-template-columns: 1fr;
   }
 }
