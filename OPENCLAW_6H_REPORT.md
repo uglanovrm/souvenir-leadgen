@@ -16,6 +16,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-008 Jobs table and local worker, implemented with polling, locking, retries, success/failure transitions, and structured logs.
 - ISSUE-009 LM Studio client and zod validation, implemented with OpenAI-compatible local provider, typed `generateJson`, repair retry, fixtures, and tests.
 - ISSUE-010 Lead scoring v1, implemented with deterministic scoring, breakdown, explanation, UI action, and Supabase update/audit path.
+- ISSUE-011 Offer generator v1, implemented with DB context assembly, LM Studio JSON draft validation, missing Avito warning propagation, context-only package/asset ID guard, draft offer insert, and selected portfolio asset linking.
 
 ## Partial issues
 
@@ -30,6 +31,9 @@ None yet.
 - `corepack pnpm test`
 - `corepack pnpm build`
 - `corepack pnpm worker`
+- `corepack pnpm --filter @souvenir-leadgen/worker test`
+- `corepack pnpm --filter @souvenir-leadgen/shared test`
+- `corepack pnpm --filter @souvenir-leadgen/worker typecheck`
 - `corepack pnpm exec next dev -p 3105`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
@@ -76,6 +80,8 @@ None yet.
 - LM Studio JSON tests: success, invalid JSON repair, and failed repair paths passed.
 - Lead scoring tests: strong eligible lead and blocked lead paths passed.
 - Lead scoring smoke: campaign detail rendered score 75, explanation, and score action in demo/read-only mode.
+- Offer generation tests: missing Avito evidence produces a warning; validated LM Studio JSON output creates a draft offer row and selected portfolio asset link; package IDs outside DB context are rejected before insert.
+- Offer generator full gate: lint, typecheck, tests, worker smoke, and build passed.
 
 ## Known problems
 
@@ -88,6 +94,8 @@ None yet.
 - Real worker polling was not run because local Supabase service role env is not configured in this environment.
 - Real LM Studio call was not run because local LM Studio is not configured/running in this environment.
 - Real Supabase score update was not run because local Supabase is not configured in this environment.
+- Real Supabase offer draft insert was not run because local Supabase is not configured in this environment.
+- Real LM Studio offer generation was not run because local LM Studio is not configured/running in this environment.
 
 ## Manual steps needed
 
@@ -95,4 +103,4 @@ None for ISSUE-001.
 
 ## Recommended next issue
 
-ISSUE-011 Offer generator v1.
+ISSUE-012 Offer Studio UI.

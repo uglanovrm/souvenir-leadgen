@@ -71,3 +71,11 @@
 - Result: Lint/typecheck/tests/build passed; campaign detail rendered score 75, explanation, and score action in demo/read-only mode.
 - Problems: Real Supabase score update was not executed because local Supabase and env values are not configured.
 - Next: Commit lead scoring and continue with ISSUE-011 Offer generator v1.
+
+## 2026-06-07 15:40
+- Current issue: ISSUE-011 Offer generator v1
+- What changed: Added shared offer generation payload/draft zod schemas, Supabase-backed offer context builder, Avito-link warning detection, LM Studio JSON draft generation, context-only package/asset ID guard, draft `offers` insert, selected portfolio asset linking into `offer_assets`, and worker handler wiring.
+- Commands run: `corepack pnpm --filter @souvenir-leadgen/worker test`, `corepack pnpm --filter @souvenir-leadgen/shared test`, `corepack pnpm --filter @souvenir-leadgen/worker typecheck`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm worker`, `corepack pnpm build`.
+- Result: Worker/shared tests passed, including 8 worker tests; full lint/typecheck/tests/build passed; worker smoke exited safely without Supabase credentials; offer generation tests validate missing Avito warning, draft offer row creation, selected package/portfolio asset IDs, and rejection of package IDs outside DB context.
+- Problems: Real Supabase draft insert and real LM Studio generation were not executed because local Supabase and LM Studio are not configured/running in this environment.
+- Next: Commit ISSUE-011 and continue with ISSUE-012 Offer Studio UI.

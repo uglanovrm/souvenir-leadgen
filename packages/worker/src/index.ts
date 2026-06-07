@@ -46,7 +46,7 @@ async function processOneJob() {
   });
 
   try {
-    const result = await handleJob(job, llmProvider);
+    const result = await handleJob(job, llmProvider, supabase);
     await markJobSucceeded(supabase, job.id, result);
     log("info", "job.succeeded", { jobId: job.id, type: job.type });
   } catch (error) {

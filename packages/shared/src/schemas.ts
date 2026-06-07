@@ -70,6 +70,24 @@ export const csvLeadRowSchema = z.object({
   industry: z.string().trim().optional().default(""),
 });
 
+export const offerGeneratePayloadSchema = z.object({
+  campaignLeadId: z.string().uuid(),
+  selectedPackageIds: z.array(z.string().uuid()).default([]),
+  selectedPortfolioAssetIds: z.array(z.string().uuid()).default([]),
+  createdBy: z.string().uuid().optional(),
+});
+
+export const offerDraftSchema = z.object({
+  title: z.string().trim().min(3).max(160),
+  summary: z.string().trim().min(10).max(1200),
+  body: z.string().trim().min(20).max(6000),
+  selectedPackageIds: z.array(z.string().uuid()).min(1),
+  selectedPortfolioAssetIds: z.array(z.string().uuid()).default([]),
+  warnings: z.array(z.string().trim().min(1)).default([]),
+  confidence: z.number().min(0).max(1),
+  sourceIdsUsed: z.array(z.string().trim().min(1)).default([]),
+});
+
 export type AppRole = z.infer<typeof appRoleSchema>;
 export type JobType = z.infer<typeof jobTypeSchema>;
 export type JobStatus = z.infer<typeof jobStatusSchema>;
@@ -78,3 +96,5 @@ export type ProductPackageFormInput = z.infer<typeof productPackageFormSchema>;
 export type PortfolioAssetFormInput = z.infer<typeof portfolioAssetFormSchema>;
 export type CampaignFormInput = z.infer<typeof campaignFormSchema>;
 export type CsvLeadRowInput = z.infer<typeof csvLeadRowSchema>;
+export type OfferGeneratePayload = z.infer<typeof offerGeneratePayloadSchema>;
+export type OfferDraft = z.infer<typeof offerDraftSchema>;
