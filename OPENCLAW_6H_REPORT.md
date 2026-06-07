@@ -23,6 +23,7 @@ Autonomous run started on 2026-06-07. P0 is implemented as a verified MVP founda
 - ISSUE-015 Logo upload and quality scoring, implemented with deterministic PNG/JPEG/SVG inspection, quality score/warnings, render-block metadata, logo upload UI/service, and approve/reject actions.
 - ISSUE-016 Template selector, implemented with deterministic ranking, inactive template exclusion, aspect-ratio penalty, explanations, and Prototype Studio selector view.
 - ISSUE-017 Sharp renderer, implemented with worker-side Sharp composition, placement/rotation, optional mask/shadow/highlight, watermark, generated mockup upload path, and `prototype_renders` insert path.
+- ISSUE-018 Prototype QC, implemented with worker-side rule scoring for logo size, safe-area overflow, missing watermark, low contrast, template mismatch, duplicate product type, QC score/warnings persistence, and final-offer metadata gating.
 
 ## Partial issues
 
@@ -57,6 +58,8 @@ None yet.
 - `curl -I http://127.0.0.1:3110/app/prototype-studio`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3110/app/prototype-studio`
 - `corepack pnpm --filter @souvenir-leadgen/worker add sharp@0.34.5`
+- `corepack pnpm --filter @souvenir-leadgen/worker test`
+- `corepack pnpm --filter @souvenir-leadgen/worker typecheck`
 - `corepack pnpm exec next dev -p 3105`
 - `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3105/app/campaigns/demo-campaign`
 - `corepack pnpm exec next dev -p 3100`
@@ -131,6 +134,7 @@ None yet.
 - Real logo upload, brand asset insert, approve, and reject mutations were not run because local Supabase is not configured in this environment.
 - Real template selector against Supabase data was not run because local Supabase is not configured in this environment.
 - Real renderer storage download/upload and `prototype_renders` insert were not run because local Supabase is not configured in this environment.
+- Real prototype QC storage download/contrast scoring and `prototype_renders` updates were not run because local Supabase is not configured in this environment.
 
 ## Manual steps needed
 

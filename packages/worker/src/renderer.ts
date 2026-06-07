@@ -20,6 +20,8 @@ type Geometry = {
 type RenderTemplate = {
   id: string;
   name: string;
+  product_type: string | null;
+  technology: string | null;
   template_bucket: string;
   metadata: Record<string, unknown>;
 };
@@ -130,7 +132,7 @@ async function downloadOptionalLayer(supabase: SupabaseClient, bucket: string, p
 async function loadTemplateRows(supabase: SupabaseClient, templateIds: string[]) {
   const { data, error } = await supabase
     .from("mockup_templates")
-    .select("id,name,template_bucket,metadata,is_active")
+    .select("id,name,product_type,technology,template_bucket,metadata,is_active")
     .in("id", templateIds)
     .eq("is_active", true);
 
@@ -182,6 +184,8 @@ export async function renderPrototypeJob(supabase: SupabaseClient, rawPayload: R
       throw new Error(`Template ${template.id} has no base layer path.`);
     }
 
+    const placement = geometryFromMetadata(metadata, "placement");
+    const safeArea = geometryFromMetadata(metadata, "safe_area");
     const base = await downloadStorageObject(supabase, template.template_bucket, basePath);
     const output = await renderMockupImage({
       base,
@@ -189,7 +193,7 @@ export async function renderPrototypeJob(supabase: SupabaseClient, rawPayload: R
       mask: await downloadOptionalLayer(supabase, template.template_bucket, layerPath(metadata, "mask")),
       shadow: await downloadOptionalLayer(supabase, template.template_bucket, layerPath(metadata, "shadow")),
       highlight: await downloadOptionalLayer(supabase, template.template_bucket, layerPath(metadata, "highlight")),
-      placement: geometryFromMetadata(metadata, "placement"),
+      placement,
       watermarkText: payload.watermarkText,
     });
     const renderId = crypto.randomUUID();
@@ -213,7 +217,12 @@ export async function renderPrototypeJob(supabase: SupabaseClient, rawPayload: R
       metadata: {
         template_id: template.id,
         brand_asset_id: brandAsset.id,
+        template_product_type: template.product_type,
+        template_technology: template.technology,
+        placement,
+        safe_area: safeArea,
         watermark: payload.watermarkText,
+        final_offer_eligible: false,
       },
     });
 

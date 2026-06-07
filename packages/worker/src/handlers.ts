@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { WorkerJob } from "@souvenir-leadgen/shared";
 import type { CompletionProvider } from "./llm/generate-json.js";
 import { generateDraftOffer } from "./offers.js";
+import { runPrototypeQcJob } from "./prototype-qc.js";
 import { renderPrototypeJob } from "./renderer.js";
 
 export type JobResult = {
@@ -54,7 +55,18 @@ export async function handleJob(
         details: result,
       };
     }
-    case "prototype.qc":
+    case "prototype.qc": {
+      if (!supabase) {
+        throw new Error("Supabase client is required for prototype.qc.");
+      }
+
+      const result = await runPrototypeQcJob(supabase, job.payload);
+
+      return {
+        summary: "prototype.qc scored generated mockups",
+        details: result,
+      };
+    }
     case "offer.render_html":
     case "offer.render_pdf":
     case "message.prepare":

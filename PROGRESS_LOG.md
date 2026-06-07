@@ -127,3 +127,11 @@
 - Result: Lint/typecheck/tests/build passed; worker renderer test generated a watermarked PNG with expected dimensions; worker smoke started with Sharp import and exited safely in stub mode without Supabase credentials.
 - Problems: Real storage download/upload and `prototype_renders` insert were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-017 and continue with ISSUE-018 Prototype QC.
+
+## 2026-06-07 16:32
+- Current issue: ISSUE-018 Prototype QC
+- What changed: Added rule-based prototype render QC worker path for `prototype.qc`, deterministic scoring for logo size, safe-area overflow, missing watermark, low contrast, template mismatch, and duplicate product type; `prototype.render` now stores placement, safe area, template product type, template technology, watermark, and `final_offer_eligible: false` metadata for downstream QC/final-offer gating.
+- Commands run: `corepack pnpm --filter @souvenir-leadgen/worker test`, `corepack pnpm --filter @souvenir-leadgen/worker typecheck`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm worker`.
+- Result: Worker QC tests passed; full lint/typecheck/tests/build passed; worker smoke started and exited safely in stub mode without Supabase credentials.
+- Problems: Real render image download, contrast scoring against Supabase Storage, and `prototype_renders` update were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-018 and continue with ISSUE-019.
