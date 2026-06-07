@@ -111,3 +111,11 @@
 - Result: Lint/typecheck/tests/build passed; shared tests now cover logo quality scoring; unauthenticated route redirected to login; demo-auth route rendered organization selector, PNG/JPG/SVG upload form, logo candidate card, score 52 warning, automatic render blocked notice, approve button, and reject button.
 - Problems: Real logo upload, brand asset insert, approve, and reject mutations were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-015 and continue with ISSUE-016 Template selector.
+
+## 2026-06-07 16:22
+- Current issue: ISSUE-016 Template selector
+- What changed: Added deterministic mockup template selector, product/technology/tag/aspect/quality scoring, inactive template exclusion, selector tests, Supabase/demo Prototype Studio service, and `/app/prototype-studio` page showing ranked template explanations.
+- Commands run: `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm exec next dev -p 3110`, `curl -I http://127.0.0.1:3110/app/prototype-studio`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3110/app/prototype-studio`.
+- Result: Lint/typecheck/tests/build passed; shared tests now cover selector ranking, inactive template exclusion, and poor aspect penalty; unauthenticated route redirected to login; demo-auth route rendered selection brief, ranked templates, scores, and explanations including product/technology/tag/quality/aspect signals.
+- Problems: Real selector against Supabase data was not exercised because local Supabase env is not configured.
+- Next: Commit ISSUE-016 and continue with ISSUE-017 Sharp renderer.
