@@ -151,3 +151,11 @@
 - Result: Lint/typecheck/tests/build passed; worker PDF unit test passed; worker smoke exited safely without Supabase credentials; unauthenticated offer route redirected to login; demo-auth route rendered Commercial handoff, export/message/deal actions, manual send gate, and commission summary.
 - Problems: Real HTML upload, PDF job execution, prepared message insert, deal/commission insert, and export asset mutation were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-020 and finish the 6-hour report checkpoint.
+
+## 2026-06-07 19:31
+- Current issue: Supabase connection and real smoke
+- What changed: Created new hosted Supabase project `souvenir-leadgen`, linked local Supabase config, saved project ref/password/API keys only in gitignored local files, applied all migrations with seed, verified storage buckets, copied env for web runtime, added `.secrets/` and `supabase/.temp/` to `.gitignore`, and created a local test admin user without sending email for authenticated RLS smoke.
+- Commands run: Supabase Management API organization/project/API key calls, `npx supabase link`, `npx supabase db push --linked --include-seed`, REST count checks for core tables, storage bucket REST check, `corepack pnpm exec next dev -p 3113`, `curl -I http://127.0.0.1:3113/login`, `curl -I http://127.0.0.1:3113/app/products`, authenticated REST smoke through Supabase auth token, `corepack pnpm worker`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`.
+- Result: Project ref `flwnrrrlyaztpmqagvgq`; migrations and seed applied; buckets present: `company-logos`, `generated-mockups`, `imports`, `mockup-sources`, `mockup-templates`, `offer-exports`, `portfolio-assets`; app runs in real Supabase mode; unauthenticated protected route redirects; authenticated REST smoke sees seeded product package; worker connects to Supabase and exits idle; lint/typecheck/tests/build passed.
+- Problems: No real business uploads/messages were executed; only setup, seed, auth smoke, and read checks were run. Supabase access token was received via Telegram as a temporary fallback, then the message was deleted; token should be revoked after setup.
+- Next: Revoke temporary Supabase access token; continue with real data entry/uploads when ready.
