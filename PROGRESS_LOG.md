@@ -135,3 +135,11 @@
 - Result: Worker QC tests passed; full lint/typecheck/tests/build passed; worker smoke started and exited safely in stub mode without Supabase credentials.
 - Problems: Real render image download, contrast scoring against Supabase Storage, and `prototype_renders` update were not executed because local Supabase env is not configured.
 - Next: Commit ISSUE-018 and continue with ISSUE-019.
+
+## 2026-06-07 16:39
+- Current issue: ISSUE-019 Prototype Studio UI
+- What changed: Expanded `/app/prototype-studio` from selector-only to approval UI showing active prototype context, logo candidates, selected/ranked templates, generated mockups, QC score/warnings, approve/reject/rerender/switch actions, and offer-asset linking for approved prototype renders while rejected renders are removed from offer assets.
+- Commands run: `corepack pnpm --filter @souvenir-leadgen/web typecheck`, `corepack pnpm --filter @souvenir-leadgen/web lint`, `corepack pnpm lint`, `corepack pnpm typecheck`, `corepack pnpm test`, `corepack pnpm build`, `corepack pnpm worker`, `corepack pnpm exec next dev -p 3111`, `curl -I http://127.0.0.1:3111/app/prototype-studio`, `curl -sS -H 'Cookie: sb-demo-auth-token=1' http://127.0.0.1:3111/app/prototype-studio`.
+- Result: Lint/typecheck/tests/build passed; worker smoke exited safely without Supabase credentials; unauthenticated route redirected to login; demo-auth route rendered Prototype approval, company logos, generated mockups, selected templates, and QC score/warnings.
+- Problems: Real logo approval, render approval/rejection, rerender queueing, template switch, and offer-asset mutation were not executed because local Supabase env is not configured.
+- Next: Commit ISSUE-019 and continue with ISSUE-020.

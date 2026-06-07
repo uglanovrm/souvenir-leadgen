@@ -149,6 +149,10 @@ h1 {
   gap: 10px;
 }
 
+.toolbar.between {
+  justify-content: space-between;
+}
+
 .button {
   background: var(--accent);
   border: 0;
@@ -246,6 +250,10 @@ h1 {
   gap: 16px;
 }
 
+.stack.compact {
+  gap: 10px;
+}
+
 .studio-layout {
   align-items: start;
   display: grid;
@@ -335,6 +343,71 @@ h1 {
 .pill.danger {
   border-color: #f7d79b;
   color: var(--warning);
+}
+
+.approval-row {
+  align-items: center;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  padding-top: 12px;
+}
+
+.approval-row:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.preview-tile {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.preview-frame {
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  background: #edf2f7;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  display: flex;
+  font-size: 13px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.preview-thumb {
+  align-items: center;
+  aspect-ratio: 1;
+  background: #edf2f7;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+}
+
+.preview-frame img,
+.preview-thumb img {
+  object-fit: cover;
+}
+
+.warning-list {
+  color: var(--warning);
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0;
+  padding-left: 18px;
 }
 
 @media (max-width: 760px) {
